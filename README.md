@@ -42,9 +42,9 @@ Install both matplotlib and wordcloud:
     2. Personal: `python3 word_cloud.py -D <path-to-fb-data>/messages/ <name>`
 2. More information: `python3 word_cloud.py --help`
 
-### Contributing
+## Contributing
 This project is at the very beginning stages. Feel free to add any more cool tools or add functionality to the existing tools.
-Make sure to update the Installation requirements with any new libraries. In the future, a requirements.txt file will be suitable.
+Make sure to update the Installation requirements with any new libraries. In the future, a `requirements.txt` file will be suitable.
 
 ## Credits
 * https://github.com/amueller/word_cloud
