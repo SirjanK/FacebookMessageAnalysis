@@ -12,27 +12,48 @@ class MessageType:
     UNSUBSCRIBE = "Unsubscribe"
 
 
+class MessageAttributes:
+    """
+    Enum containing the message attributes.
+    """
+    PHOTOS = 'photos'
+    SENDER_NAME = 'sender_name'
+    TIMESTAMP_MS = 'timestamp_ms'
+    AUDIO_FILES = 'audio_files'
+    GIFS = 'gifs'
+    REACTIONS = 'reactions'
+    USERS = 'users'
+    TYPE = 'type'
+    SHARE = 'share'
+    STICKER = 'sticker'
+    CONTENT = 'content'
+    VIDEOS = 'videos'
+    FILES = 'files'
+
+
+def construct_attribute_vals():
+    """
+    Helper method to construct a list of attribute keys.
+    :return: array of attribute keys.
+    """
+    attributes = []
+    message_attribute_dict = MessageAttributes.__dict__
+
+    for attr_key in message_attribute_dict:
+        if not attr_key.startswith('_'):
+            attributes.append(message_attribute_dict[attr_key])
+
+    return attributes
+
+
+# One time initialized list of attributes
+ATTRIBUTES = construct_attribute_vals()
+
+
 class FacebookMessage:
     """
     A FacebookMessage object encapsulates a single message.
     """
-
-    ATTRIBUTES = [
-        'photos',
-        'sender_name',
-        'timestamp_ms',
-        'audio_files',
-        'gifs',
-        'reactions',
-        'users',
-        'type',
-        'share',
-        'sticker',
-        'content',
-        'videos',
-        'files'
-    ]
-
     def __init__(self, msg_dict):
         """
         Initialize the Facebook message object from a raw message dict.
@@ -40,19 +61,19 @@ class FacebookMessage:
 
         TODO: Add more support for canonical forms of all attributes
         """
-        self.type = self.parse_from_dict(msg_dict, 'type')
-        self.sender_name = self.parse_from_dict(msg_dict, 'sender_name')
-        self.timestamp_ms = self.parse_from_dict(msg_dict, 'timestamp_ms')
-        self.content = self.parse_from_dict(msg_dict, 'content')
-        self.photos = self.parse_from_dict(msg_dict, 'photos')
-        self.audio_files = self.parse_from_dict(msg_dict, 'audio_files')
-        self.gifs = self.parse_from_dict(msg_dict, 'gifs')
-        self.reactions = self.parse_from_dict(msg_dict, 'reactions')
-        self.users = self.parse_from_dict(msg_dict, 'users')
-        self.share = self.parse_from_dict(msg_dict, 'share')
-        self.sticker = self.parse_from_dict(msg_dict, 'sticker')
-        self.videos = self.parse_from_dict(msg_dict, 'videos')
-        self.files = self.parse_from_dict(msg_dict, 'files')
+        self.type = self.parse_from_dict(msg_dict, MessageAttributes.TYPE)
+        self.sender_name = self.parse_from_dict(msg_dict, MessageAttributes.SENDER_NAME)
+        self.timestamp_ms = self.parse_from_dict(msg_dict, MessageAttributes.TIMESTAMP_MS)
+        self.content = self.parse_from_dict(msg_dict, MessageAttributes.CONTENT)
+        self.photos = self.parse_from_dict(msg_dict, MessageAttributes.PHOTOS)
+        self.audio_files = self.parse_from_dict(msg_dict, MessageAttributes.AUDIO_FILES)
+        self.gifs = self.parse_from_dict(msg_dict, MessageAttributes.GIFS)
+        self.reactions = self.parse_from_dict(msg_dict, MessageAttributes.REACTIONS)
+        self.users = self.parse_from_dict(msg_dict, MessageAttributes.USERS)
+        self.share = self.parse_from_dict(msg_dict, MessageAttributes.SHARE)
+        self.sticker = self.parse_from_dict(msg_dict, MessageAttributes.STICKER)
+        self.videos = self.parse_from_dict(msg_dict, MessageAttributes.VIDEOS)
+        self.files = self.parse_from_dict(msg_dict, MessageAttributes.FILES)
 
     @staticmethod
     def parse_from_dict(msg_dict, key):
@@ -114,15 +135,15 @@ def construct_message_dataframe(msg_file):
     columns = dict()
 
     # Initialize as empty list
-    for attr in FacebookMessage.ATTRIBUTES:
+    for attr in ATTRIBUTES:
         columns[attr] = []
 
     # Iterate through messages
     for msg in fb_messages:
         msg_dict = msg.__dict__
 
-        for attr in FacebookMessage.ATTRIBUTES:
+        for attr in ATTRIBUTES:
             columns[attr].append(msg_dict[attr])
 
-    return pd.DataFrame.from_dict(columns)
+    return chat_name, pd.DataFrame.from_dict(columns)
 

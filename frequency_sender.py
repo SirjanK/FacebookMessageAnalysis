@@ -32,7 +32,7 @@ def plot_histogram(chat_name, freqs):
     """
     plt.xlabel('Members')
     plt.ylabel('Frequency')
-    plt.title(chat_name + ' Message Frequency')
+    plt.title('{} Message Frequency'.format(chat_name))
     plt.bar(freqs.keys(), freqs.values())
     plt.show()
 
