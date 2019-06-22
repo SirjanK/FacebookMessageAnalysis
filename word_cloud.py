@@ -86,7 +86,8 @@ def generate_word_cloud_specific_chat(message_file, max_words=200):
 
 if __name__ == '__main__':
     parser = argparse.ArgumentParser(description='Generate a word cloud for all your messages or for a specific chat.')
-    parser.add_argument('-D', '--all_messages_dir', type=str, nargs='+', help='filepath of the directory holding all the chats and the name of the user, in that order.')
+    parser.add_argument('-D', '--all_messages_dir', type=str, nargs='+',
+                        help='filepath of the directory holding all the chats and the name of the user, in that order.')
     parser.add_argument('-F', '--message_file', type=str, nargs=1, help='filepath of message file for a specific chat.')
 
     args = parser.parse_args()
