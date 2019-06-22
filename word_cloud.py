@@ -1,6 +1,7 @@
 import argparse
 import os
 import matplotlib.pyplot as plt
+import re
 
 from wordcloud import WordCloud, STOPWORDS
 
@@ -44,7 +45,7 @@ def generate_word_cloud_all_messages(all_messages_dir, user, max_words=200):
     """
     all_chat_jsons = []
     for dir_path, dir_names, fnames in os.walk(all_messages_dir):
-        if not dir_names and len(fnames) == 1 and fnames[0] == 'message.json':
+        if not dir_names and len(fnames) == 1 and re.match("message.*\.json", fnames[0]):
             chat_json_filepath = os.path.join(dir_path, fnames[0])
             all_chat_jsons.append(chat_json_filepath)
 
