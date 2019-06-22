@@ -1,0 +1,2 @@
+wordcloud==1.4.1
+matplotlib==2.2.2
