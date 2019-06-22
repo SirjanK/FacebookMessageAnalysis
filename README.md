@@ -24,8 +24,6 @@ To gather Facebook data in order to run these tools, follow these steps:
 </div>
 
 ## List of Tools
-TODO: Insert examples open to public
-
 1. Sender Frequency: Plots the frequency of messages per user in a group chat.
 
 2. Word Cloud: Constructs a word cloud without common words for either:
