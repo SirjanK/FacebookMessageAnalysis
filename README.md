@@ -19,6 +19,9 @@ TODO: Insert examples open to public
     1. Group chats/1-1 chats: Accumulation of words for all messages for all users. 
     2. Personal: Accumuluation of words sent by the user for all messages across all chats.
 
+3. Group Chat Growth: Plots the number of messages vs time for each member
+of the group chat. Shows how the growth is over time per member.
+
 ## Quick Dive
 ### Installation
 Install both matplotlib and wordcloud:
@@ -34,6 +37,7 @@ Install both matplotlib and wordcloud:
 
 #### Sender Frequency
 1. Usage: `python3 frequency_sender.py <path-to-fb-data>/messages/<chat-folder>/message.json`
+    1. Note: Add the `-s` flag to shorten names to first names.
 2. More information: `python3 frequency_sender.py --help`
 
 #### Word Cloud
@@ -41,6 +45,10 @@ Install both matplotlib and wordcloud:
     1. Group chats/1-1 chats:  `python3 word_cloud.py -F <path-to-fb-data>/messages/<chat-folder>/message.json`
     2. Personal: `python3 word_cloud.py -D <path-to-fb-data>/messages/ <name>`
 2. More information: `python3 word_cloud.py --help`
+
+#### Group Chat Growth
+1. Usage: `python3 chat_growth.py <path-to-fb-data>/messages/<chat-folder>/message.json`
+2. More information: `python3 chat_growth.py --help`
 
 ## Contributing
 This project is at the very beginning stages. Feel free to add any more cool tools or add functionality to the existing tools.
