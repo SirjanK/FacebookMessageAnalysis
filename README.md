@@ -28,7 +28,7 @@ To gather Facebook data in order to run these tools, follow these steps:
 
 2. Word Cloud: Constructs a word cloud without common words for either:
     1. Group chats/1-1 chats: Accumulation of words for all messages for all users. 
-    2. Personal: Accumuluation of words sent by the user for all messages across all chats.
+    2. Personal: Accumulation of words sent by the user for all messages across all chats.
 
 3. Group Chat Growth: Plots the number of messages vs time for each member
 of the group chat. Shows how the growth is over time per member.
