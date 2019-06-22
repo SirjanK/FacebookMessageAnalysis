@@ -10,6 +10,19 @@ To gather Facebook data in order to run these tools, follow these steps:
 4. (Optional) Uncheck any pieces of unneeded information if you are not interested. The only source important for these tools are "Messages"
 5. Press Create File & wait until Facebook notifies you that the file is ready. The file will last for a few days.
 
+## Examples
+<div class="images">
+<div>
+  <img src="examples/example_word_cloud.png" border="0" height="300" />
+</div>
+<div>
+   <img src="examples/example_chat_growth.png" border="0" height="300" />
+</div>
+<div>
+   <img src="examples/example_message_frequency.png" border="0" height="300" />
+</div>
+</div>
+
 ## List of Tools
 TODO: Insert examples open to public
 
