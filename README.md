@@ -43,7 +43,7 @@ Install both matplotlib and wordcloud:
 #### Word Cloud
 1. Usage:
     1. Group chats/1-1 chats:  `python3 word_cloud.py -F <path-to-fb-data>/messages/<chat-folder>/message.json`
-    2. Personal: `python3 word_cloud.py -D <path-to-fb-data>/messages/ <name>`
+    2. Personal: `python3 word_cloud.py -D <path-to-fb-data>/messages/inbox/ <name>`
 2. More information: `python3 word_cloud.py --help`
 
 #### Group Chat Growth
