@@ -1,8 +1,10 @@
 import argparse
-import json
 import os
 import matplotlib.pyplot as plt
+
 from wordcloud import WordCloud, STOPWORDS
+
+from util.message_reader import read_message_json, construct_fb_messages, MessageType
 
 
 def generate_word_cloud(body_of_text, title, max_words=200):
@@ -46,17 +48,16 @@ def generate_word_cloud_all_messages(all_messages_dir, user, max_words=200):
             chat_json_filepath = os.path.join(dir_path, fnames[0])
             all_chat_jsons.append(chat_json_filepath)
 
-    title = "Word Cloud for " + user
+    title = "Word Cloud for {}".format(user)
     all_messages = []
     
     for chat_json_filepath in all_chat_jsons:
-        with open(chat_json_filepath) as f:
-            msgs_file_json = json.load(f)
+        _, msgs = read_message_json(chat_json_filepath)
+        fb_msgs = construct_fb_messages(msgs)
 
-        msgs = msgs_file_json['messages']
-        for message in msgs:
-            if message['sender_name'] == user and message['type'] == 'Generic' and 'content' in message:
-                all_messages.append(message['content'])
+        for message in fb_msgs:
+            if message.sender_name == user and message.type == MessageType.GENERIC and message.content:
+                all_messages.append(message.content)
 
     body_of_text = ' '.join(all_messages)
     generate_word_cloud(body_of_text, title, max_words)
@@ -68,17 +69,15 @@ def generate_word_cloud_specific_chat(message_file, max_words=200):
     :param message_file: filepath (str) to the chat messages.
     :param max_words:    number of words to include in the cloud.
     """
-    with open(message_file) as f:
-        msgs_file_json = json.load(f)
+    chat_name, msgs = read_message_json(message_file)
+    fb_messages = construct_fb_messages(msgs)
 
-    chat_name = msgs_file_json['title']
-    title = "Word Cloud for " + chat_name
-    msgs = msgs_file_json['messages']
+    title = "Word Cloud for {}".format(chat_name)
 
     all_messages = []
-    for message in msgs:
-        if message['type'] == 'Generic' and 'content' in message:
-            all_messages.append(message['content'])
+    for message in fb_messages:
+        if message.type == MessageType.GENERIC and message.content:
+            all_messages.append(message.content)
 
     body_of_text = ' '.join(all_messages)
     generate_word_cloud(body_of_text, title, max_words)

@@ -1,35 +1,20 @@
 import argparse
-import json
 import matplotlib.pyplot as plt
 
 from util.name_utils import parse_first_name
-
-
-def read_in_json(message_file):
-    """
-    Read in json file representing the chat messages and retrieve the chat name and all the messages.
-
-    :param message_file: filepath (str) to the chat messages.
-    :return:             chat name (str) and dictionary of messages from the chat.
-    """
-    with open(message_file) as f:
-        msgs_file_json = json.load(f)
-
-    chat_name = msgs_file_json['title']
-    msgs = msgs_file_json['messages']
-    return chat_name, msgs
+from util.message_reader import read_message_json, construct_fb_messages
 
 
 def retrieve_frequencies(msgs):
     """
     Retrieve sender -> count numbers.
     
-    :param msgs: dictionary containing chat messages where the keys are the senders.
+    :param msgs: list of FacebookMessage objects
     :return:     dictionary mapping sender name to count.
     """
     freqs = dict()
     for message in msgs:
-        member = message['sender_name']
+        member = message.sender_name
         if member in freqs:
             freqs[member] += 1
         else:
@@ -77,8 +62,10 @@ if __name__ == '__main__':
     args = parser.parse_args()
     message_file = args.message_file[0]
 
-    chat_name, msgs = read_in_json(message_file)
-    freqs = retrieve_frequencies(msgs)
+    chat_name, msgs = read_message_json(message_file)
+    fb_messages = construct_fb_messages(msgs)
+
+    freqs = retrieve_frequencies(fb_messages)
 
     if args.shorten:
         freqs = retrieve_first_names(freqs)
